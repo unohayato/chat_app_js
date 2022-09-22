@@ -12,6 +12,12 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
   console.log("ユーザが接続しました");
+
+  socket.on("chat message", (msg) => {
+    console.log("メッセージ: " + msg)
+
+    io.emit("chat message", msg);
+  })
 });
 
 server.listen(PORT, () => {
